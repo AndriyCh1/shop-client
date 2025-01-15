@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
+import { SessionProvider } from 'next-auth/react';
 import localFont from 'next/font/local';
+
+import { getSession } from '@modules/auth/services';
+
 import './globals.css';
 
 const integralCf = localFont({
@@ -99,17 +103,21 @@ export const metadata: Metadata = {
   description: 'Shop with us'
 };
 
-export default function RootLayout({
+export default async function GlobalLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getSession();
+
   return (
     <html lang="en">
       <body
         className={`${satoshi.variable} ${integralCf.variable} antialiased`}
       >
-        {children}
+        <SessionProvider basePath={'/api/auth'} session={session}>
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );
