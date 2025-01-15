@@ -2,6 +2,19 @@
   "trailingComma": "none",
   "singleQuote": true,
   "importOrder": [
+    "server-only",
+    "<THIRD_PARTY_MODULES>",
+    "^@api/(.*)$",
+    "^@app/(.*)$",
+    "^@modules/(.*)$",
+    "^@components/(.*)$",
+    "^@libs/(.*)$",
+    "^../(.*)$",
+    "^./(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ]
