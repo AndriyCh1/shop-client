@@ -93,10 +93,12 @@ export const {
 });
 
 export async function signUp(credentials: SignUpData) {
-  return axios.post<AuthResponse>(
+  const response = await axios.post<AuthResponse>(
     `${process.env.SERVER_URL}/auth/signup`,
     credentials
   );
+
+  return response.data;
 }
 
 declare module 'next-auth' {

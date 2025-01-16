@@ -5,7 +5,7 @@ export const ROOT = '/';
 export const PUBLIC_ROUTES = [
   SIGN_IN,
   SIGN_UP,
-  '/client-example',
+  '/category',
   '/api/auth/callback/google',
   '/api/auth/callback/github'
 ];
