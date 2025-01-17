@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -22,7 +22,12 @@ import { Input } from '@components/ui/input';
 
 import { cn } from '@libs/utils/tw-merge';
 
-export function SignInForm() {
+export interface SignInFormProps {
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+}
+
+export function SignInForm({ header, footer }: SignInFormProps) {
   const [submitError, setSubmitError] = useState('');
 
   const form = useForm<z.infer<typeof signInSchema>>({
@@ -50,10 +55,14 @@ export function SignInForm() {
         aria-describedby="sign-in-description"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <h1 className="text-3xl font-bold">Sign In</h1>
-        <p id="sign-in-description" className="mt-4">
-          Enter your details below
-        </p>
+        {header || (
+          <>
+            <h1 className="text-3xl font-bold">Sign In</h1>
+            <p id="sign-in-description" className="mt-4">
+              Enter your details below
+            </p>
+          </>
+        )}
         <FormField
           control={form.control}
           name="email"
@@ -108,7 +117,7 @@ export function SignInForm() {
           <p className="mt-4 px-1 text-sm text-red-500">{submitError}</p>
         )}
         <fieldset className="mt-4 flex items-center justify-between gap-5 sm:gap-10 md:gap-16">
-          <Button type="submit" className="xs:px-12 px-6">
+          <Button type="submit" className="px-6 xs:px-12">
             Sign In
           </Button>
           <Link href="/forgot-password" className="text-sm font-medium">
@@ -116,12 +125,14 @@ export function SignInForm() {
           </Link>
         </fieldset>
 
-        <p className="mt-4 text-center text-sm">
-          Don&apos;t have an account yet?{' '}
-          <Link href="/sign-up" className="font-medium">
-            Sign up
-          </Link>
-        </p>
+        {footer || (
+          <p className="mt-4 text-center text-sm">
+            Don&apos;t have an account yet?{' '}
+            <Link href="/sign-up" className="font-medium">
+              Sign up
+            </Link>
+          </p>
+        )}
       </form>
     </Form>
   );

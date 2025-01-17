@@ -6,8 +6,11 @@ export function ContentContainer({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('mx-auto max-w-[1240px]', className)} {...props}>
-      <div className="mx-4 sm:mx-8">{children}</div>
+    <div
+      className={cn('mx-auto max-w-[1240px] px-4 sm:px-8', className)}
+      {...props}
+    >
+      {children}
     </div>
   );
 }

@@ -15,8 +15,8 @@ export function CategoriesPanel({ categories }: CategoriesMenuProps) {
   const [currentCategoryIdx, setCurrentCategoryIdx] = useState(0);
 
   return (
-    <div className="flex max-h-[500px] w-full max-w-7xl rounded-sm bg-[#fcfcfd] py-1 text-sm">
-      <ul className="w-[200px] border-r-2 border-r-[#e5e5e5] md:w-[300px]">
+    <div className="flex max-h-[500px] w-full max-w-7xl rounded-md border bg-popover py-1 text-sm">
+      <ul className="w-[200px] border-r md:w-[300px]">
         {categories
           .filter((category) => !category.parentId)
           .map((category, idx) => (
@@ -35,21 +35,24 @@ export function CategoriesPanel({ categories }: CategoriesMenuProps) {
             </li>
           ))}
       </ul>
-      <ul className="xs:w-[35vw] w-[25vw] px-4 py-2 sm:w-[40vw] md:w-[50vw]">
+      <ul className="w-[25vw] px-4 py-2 xs:w-[35vw] sm:w-[40vw] md:w-[50vw]">
         {categories.length > 0 && (
           <div className="flex h-full w-fit flex-col flex-wrap items-start justify-start gap-4">
             {categories[currentCategoryIdx].children.map((secondLevel) => (
               <li key={secondLevel.id}>
                 <Link
                   href={`/category/${secondLevel.id}`}
-                  className="pb-16 font-medium"
+                  className="crawl-underline font-medium"
                 >
                   {secondLevel.name}
                 </Link>
-                <ul>
+                <ul className="">
                   {secondLevel.children.map((leaf) => (
                     <li key={leaf.id} className="leading-none">
-                      <Link href={`/category/${leaf.id}`} className="text-sm">
+                      <Link
+                        href={`/category/${leaf.id}`}
+                        className="crawl-underline text-sm"
+                      >
                         {leaf.name}
                       </Link>
                     </li>

@@ -1,19 +1,14 @@
-import Link from 'next/link';
-
 import {
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenu as NavigationMenuPrimitive,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle
+  NavigationMenuTrigger
 } from '@components/ui/navigation-menu';
 
 import { NestedCategory } from '@libs/utils/categories';
-import { cn } from '@libs/utils/tw-merge';
 
-import { CategoriesPanel } from './';
+import { CategoriesPanel, NavLink } from './';
 
 export interface CategoriesMenuProps {
   categories: NestedCategory[];
@@ -31,42 +26,9 @@ export function NavigationMenu({ categories }: CategoriesMenuProps) {
             <CategoriesPanel categories={categories} />
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/sale" legacyBehavior passHref>
-            <NavigationMenuLink
-              className={cn(
-                navigationMenuTriggerStyle(),
-                'text-sm lg:text-base'
-              )}
-            >
-              On Sale
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/new-arrivals" legacyBehavior passHref>
-            <NavigationMenuLink
-              className={cn(
-                navigationMenuTriggerStyle(),
-                'text-sm lg:text-base'
-              )}
-            >
-              New Arrivals
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/contact" legacyBehavior passHref>
-            <NavigationMenuLink
-              className={cn(
-                navigationMenuTriggerStyle(),
-                'text-sm lg:text-base'
-              )}
-            >
-              Contact
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        <NavLink link="/sale" name=" On Sale" />
+        <NavLink link="/new-arrivals" name="New Arrivals" />
+        <NavLink link="/contacts" name="Contacts" />
       </NavigationMenuList>
     </NavigationMenuPrimitive>
   );

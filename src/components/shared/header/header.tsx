@@ -1,4 +1,4 @@
-import { CircleUser, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -9,7 +9,7 @@ import { ContentContainer } from '@components/shared/content-container';
 
 import { nestCategories } from '@libs/utils/categories';
 
-import { BurgerMenu, NavigationMenu, SearchInput } from './';
+import { BurgerMenu, NavigationMenu, SearchInput, UserButton } from './';
 
 export async function Header() {
   const categories = await categoriesService.getCategoriesHierarchy();
@@ -20,7 +20,7 @@ export async function Header() {
       <ContentContainer>
         <div className="flex items-center justify-between gap-2 py-4 sm:gap-6 lg:gap-2">
           <BurgerMenu categories={nestedCategories} />
-          <Link href="/" className="xs:block hidden">
+          <Link href="/" className="hidden xs:block">
             <Image
               src="/images/logo.png"
               alt="Logo"
@@ -31,9 +31,9 @@ export async function Header() {
           </Link>
           <NavigationMenu categories={nestedCategories} />
           <SearchInput />
-          <div className="flex gap-4">
+          <div className="flex items-center gap-2 px-2">
             <ShoppingCart />
-            <CircleUser className="hidden lg:block" />
+            <UserButton />
           </div>
         </div>
       </ContentContainer>

@@ -5,3 +5,5 @@ export * from './categories-accordion';
 export * from './search-input';
 export * from './navigation-menu';
 export * from './burger-menu';
+export * from './user-button';
+export * from './nav-link';

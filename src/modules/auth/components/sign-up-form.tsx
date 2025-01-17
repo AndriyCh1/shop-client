@@ -22,7 +22,12 @@ import { Input } from '@components/ui/input';
 
 import { cn } from '@libs/utils/tw-merge';
 
-export function SignUpForm() {
+export interface SignUpFormProps {
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+}
+
+export function SignUpForm({ header, footer }: SignUpFormProps) {
   const [submitError, setSubmitError] = useState('');
 
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -61,9 +66,12 @@ export function SignUpForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         onFocus={() => setSubmitError('')}
       >
-        <h1 className="text-3xl font-bold">Create account</h1>
-        <p id="sign-up-description">Enter your details below</p>
-
+        {header || (
+          <>
+            <h1 className="text-3xl font-bold">Create account</h1>
+            <p id="sign-up-description">Enter your details below</p>
+          </>
+        )}
         <FormField
           control={form.control}
           name="firstName"
@@ -168,16 +176,20 @@ export function SignUpForm() {
           <p className="mt-4 px-1 text-sm text-red-500">{submitError}</p>
         )}
 
-        <Button type="submit" className="xs:px-12 mt-4 w-full px-6">
+        <Button type="submit" className="mt-4 w-full px-6 xs:px-12">
           Create an account
         </Button>
 
-        <p className="mt-4 text-center text-sm">
-          Already have an account?{' '}
-          <Link href="/sign-in" className="font-medium">
-            Sign in
-          </Link>
-        </p>
+        {footer || (
+          <>
+            <p className="mt-4 text-center text-sm">
+              Already have an account?{' '}
+              <Link href="/sign-in" className="font-medium">
+                Sign in
+              </Link>
+            </p>
+          </>
+        )}
       </form>
     </Form>
   );
