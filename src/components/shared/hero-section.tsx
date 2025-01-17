@@ -7,7 +7,7 @@ import { Button } from '@components/ui/button';
 
 export function HeroSection() {
   return (
-    <section className="bg-seashell max-h-[850] overflow-hidden sm:max-h-[670px]">
+    <section className="bg-seashell sm:max-h-auto max-h-[850] overflow-hidden">
       <ContentContainer className="py-10 sm:flex sm:justify-center sm:gap-8 sm:py-12 md:py-16 lg:pb-[125px] lg:pt-[105px]">
         <div className="flex-1">
           <h1 className="2lg:text-6xl font-integral-cf text-4xl font-bold uppercase tracking-normal lg:text-5xl">
@@ -54,9 +54,9 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="flex-1 sm:relative">
-          <Sparkle className="absolute right-14 top-0 z-30 size-20" />
-          <Sparkle className="absolute left-8 top-48 z-30 size-10" />
+        <div className="relative flex-1">
+          <Sparkle className="absolute right-14 top-0 z-10 size-20" />
+          <Sparkle className="absolute left-8 top-48 z-10 size-10" />
           <Image
             src="/images/fashionable-couple-posing.jpg"
             className="z-20 sm:absolute sm:-bottom-16 sm:right-0 md:bottom-0 md:translate-y-1/3 lg:-bottom-1/4 lg:translate-y-1/4"

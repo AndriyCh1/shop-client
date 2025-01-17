@@ -16,7 +16,7 @@ export interface CategoriesMenuProps {
 
 export function NavigationMenu({ categories }: CategoriesMenuProps) {
   return (
-    <NavigationMenuPrimitive className="mx-1 hidden lg:mx-4 lg:block">
+    <NavigationMenuPrimitive className="z-[500] mx-1 hidden lg:mx-4 lg:block">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-sm lg:text-base">

@@ -70,6 +70,6 @@ function initInterceptors(axiosInstance: AxiosInstance) {
   return axiosInstance;
 }
 
-const httpClient = initInterceptors(axios.create({ baseURL: BASE_SERVER_URL }));
-
-export default httpClient;
+export const serverFetcher = initInterceptors(
+  axios.create({ baseURL: BASE_SERVER_URL })
+);
