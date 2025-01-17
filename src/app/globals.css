@@ -29,6 +29,8 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --seashell: #F2F0F1;
+    --seashell-foreground:#74747b;
   }
 
   .dark {
@@ -76,6 +78,21 @@
   }
 }
 
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .crawl-underline {
+    @apply relative cursor-pointer after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
+
 ::-webkit-scrollbar {
 	width: 9px;
 }
@@ -88,10 +105,4 @@
 	@apply rounded-full bg-secondary;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
 
-.scrollbar-hide {
-  scrollbar-width: none;
-}
