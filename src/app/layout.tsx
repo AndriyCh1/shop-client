@@ -23,7 +23,11 @@ export default async function GlobalLayout({
       <body
         className={`${satoshi.variable} ${integralCf.variable} antialiased`}
       >
-        <SessionProvider basePath={'/api/auth'} session={session}>
+        <SessionProvider
+          basePath={'/api/auth'}
+          session={session}
+          key={session?.user.id} // Without the `key`, the session data is not updated on the client
+        >
           {children}
         </SessionProvider>
       </body>
