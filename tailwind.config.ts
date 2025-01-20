@@ -50,6 +50,10 @@ export default {
           DEFAULT: 'var(--seashell)',
           foreground: 'var(--seashell-foreground)'
         },
+        'carmin-pink': {
+          DEFAULT: 'hsl(var(--carmin-pink))',
+          foreground: 'hsl(var(--carmin-pink-foreground))'
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { serverFetcher } from '@libs/services';
+import { serverFetcher } from '@libs/server-fetcher';
 import { SuccessResponse } from '@libs/types/http';
 
 import { CategoryHierarchy } from './types';

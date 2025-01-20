@@ -1,6 +1,7 @@
 {
   "trailingComma": "none",
   "singleQuote": true,
+  "printWidth": 80,
   "importOrder": [
     "server-only",
     "<THIRD_PARTY_MODULES>",
