@@ -1,0 +1,22 @@
+{
+  "trailingComma": "none",
+  "singleQuote": true,
+  "printWidth": 80,
+  "importOrder": [
+    "server-only",
+    "<THIRD_PARTY_MODULES>",
+    "^@api/(.*)$",
+    "^@app/(.*)$",
+    "^@modules/(.*)$",
+    "^@components/(.*)$",
+    "^@libs/(.*)$",
+    "^../(.*)$",
+    "^./(.*)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ]
+}
