@@ -6,3 +6,4 @@ export * from './sale-price-badge';
 export * from './highlighted-products';
 export * from './highlighted-products-section';
 export * from './product-image';
+export * from './option-controller';
