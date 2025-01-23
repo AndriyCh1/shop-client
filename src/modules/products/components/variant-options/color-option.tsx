@@ -41,7 +41,7 @@ export function ColorOption({
       <button
         type="button"
         className={cn(
-          'relative h-8 w-8 rounded-full',
+          'relative size-8 rounded-full',
           'after:absolute after:left-1/2 after:top-1/2 after:block after:h-0.5 after:w-full after:rounded-full',
           'after:-translate-x-1/2 after:-translate-y-1/2 after:rotate-45 after:scale-[0.80] after:bg-slate-400 after:content-[""]',
           { 'ring-1 ring-slate-400 ring-offset-2': isActive },

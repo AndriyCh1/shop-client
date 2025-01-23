@@ -1,24 +1,28 @@
-import { OptionController } from '@modules/products/components/option-selector';
+import { OptionController } from '@modules/products/components/option-controller';
 import { SizeOption } from '@modules/products/components/variant-options/size-option';
+
+import { cn } from '@libs/utils/tw-merge';
 
 export interface SizeSelectorProps {
   sizeOptions: string[];
-  initialSize?: string;
   getAvailabilityStatus: (option: string) => {
     inStock: boolean;
     exists: boolean;
   };
   onSizeChange: (value: string) => void;
+  className?: string;
+  initialSize?: string;
 }
 
 export function SizeSelector({
+  className,
   sizeOptions,
   initialSize,
   getAvailabilityStatus,
   onSizeChange
 }: SizeSelectorProps) {
   return (
-    <div className="mt-3 flex items-center gap-2">
+    <div className={cn('flex items-center gap-2', className)}>
       <OptionController
         options={sizeOptions}
         initialValues={initialSize ? [initialSize] : []}
@@ -28,6 +32,7 @@ export function SizeSelector({
           return (
             <SizeOption
               key={index}
+              className="h-11 px-5"
               value={option}
               active={isSelected}
               onChange={() => {

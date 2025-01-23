@@ -1,24 +1,28 @@
-import { OptionController } from '@modules/products/components/option-selector';
+import { OptionController } from '@modules/products/components/option-controller';
 import { ColorOption } from '@modules/products/components/variant-options/color-option';
+
+import { cn } from '@libs/utils/tw-merge';
 
 export interface ColorSelectorProps {
   colorOptions: string[];
-  initialColor?: string;
   getAvailabilityStatus: (option: string) => {
     inStock: boolean;
     exists: boolean;
   };
   onColorChange: (value: string) => void;
+  className?: string;
+  initialColor?: string;
 }
 
 export function ColorSelector({
+  className,
   colorOptions,
   onColorChange,
   getAvailabilityStatus,
   initialColor
 }: ColorSelectorProps) {
   return (
-    <div className="flex items-center gap-2">
+    <div className={cn('flex items-center gap-2', className)}>
       <OptionController
         options={colorOptions}
         initialValues={initialColor ? [initialColor] : []}
@@ -28,6 +32,7 @@ export function ColorSelector({
           return (
             <ColorOption
               key={index}
+              className="size-9"
               value={option}
               active={isSelected}
               onChange={() => {

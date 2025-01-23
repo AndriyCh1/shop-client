@@ -47,7 +47,7 @@ export function SizeOption({
       type="button"
       variant={isActive ? 'default' : 'secondary'}
       className={cn(
-        `relative rounded-full p-1 px-5 text-sm font-medium capitalize`,
+        `relative rounded-full text-sm font-medium capitalize`,
         { [crossedButtonClassName]: crossed },
         { 'text-muted-foreground hover:bg-black/10': !isActive && !crossed },
         { 'bg-gray-50 text-gray-400 hover:bg-black/10': !isActive && crossed },
