@@ -97,6 +97,7 @@
 
 ::-webkit-scrollbar {
 	width: 9px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -104,7 +105,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-	@apply rounded-full bg-secondary;
+	@apply rounded-full bg-muted;
 }
 
 

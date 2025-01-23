@@ -12,6 +12,7 @@ import { ProductImage, SalePriceBadge } from './';
 
 export interface ProductCardProps {
   id: Product['id'];
+  variantId: Product['variantId'];
   name: Product['name'];
   rating: Product['rating'];
   price: Product['salePrice'];
@@ -21,6 +22,7 @@ export interface ProductCardProps {
 
 export function ProductCard({
   id,
+  variantId,
   name,
   rating,
   price,
@@ -36,7 +38,7 @@ export function ProductCard({
 
   return (
     <div className="group">
-      <Link href={`/product/${id}`}>
+      <Link href={`/products/${id}?v=${variantId}`} target="_blank">
         <div className="relative overflow-hidden rounded-xl bg-muted p-7">
           <ProductImage imagePath={imagePath ?? undefined} alt={name} />
           <Button
