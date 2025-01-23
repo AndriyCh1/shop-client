@@ -14,6 +14,7 @@ export async function BestSellersProducts() {
       title="Top selling"
       products={paginatedBestSellers.data.map((product) => ({
         id: product.id,
+        variantId: product.variantId,
         imagePath: product.image,
         price: product.salePrice,
         comparedPrice: product.comparedPrice,

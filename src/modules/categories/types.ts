@@ -1,6 +1,6 @@
 import { Category } from '@libs/types/models';
 
-export type CategoryHierarchy = {
+export type CategoryHierarchyItem = {
   id: Category['id'];
   name: Category['name'];
   description: Category['description'];

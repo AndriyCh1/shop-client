@@ -1,11 +1,11 @@
-import { CategoryHierarchy } from '@modules/categories/types';
+import { CategoryHierarchyItem } from '@modules/categories/types';
 
-export type NestedCategory = CategoryHierarchy & {
+export type NestedCategory = CategoryHierarchyItem & {
   children: NestedCategory[];
 };
 
 export function nestCategories(
-  categories: CategoryHierarchy[],
+  categories: CategoryHierarchyItem[],
   parentId: number | null = null,
   toDepth?: number
 ): NestedCategory[] {

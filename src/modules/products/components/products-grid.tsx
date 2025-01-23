@@ -17,6 +17,7 @@ export function ProductsGrid({ products }: ProductsGridProps) {
         <ProductCard
           key={product.id}
           id={product.id}
+          variantId={product.variantId}
           imagePath={product.imagePath}
           name={product.name}
           price={product.price}

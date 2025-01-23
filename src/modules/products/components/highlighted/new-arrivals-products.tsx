@@ -15,6 +15,7 @@ export async function NewArrivalsProducts() {
       title="New arrivals"
       products={paginatedNewArrivals.data.map((product) => ({
         id: product.id,
+        variantId: product.variantId,
         imagePath: product.image,
         price: product.salePrice,
         comparedPrice: product.comparedPrice,

@@ -20,14 +20,8 @@ export async function Header() {
       <ContentContainer>
         <div className="flex items-center justify-between gap-2 py-4 sm:gap-6 lg:gap-2">
           <BurgerMenu categories={nestedCategories} />
-          <Link href="/" className="hidden xs:block">
-            <Image
-              src="/images/logo.png"
-              alt="Logo"
-              width={140}
-              height={140}
-              className="min-w-[100px]"
-            />
+          <Link href="/" className="hidden xs:block lg:flex-shrink-0">
+            <Image src="/images/logo.png" alt="Logo" width={140} height={25} />
           </Link>
           <NavigationMenu categories={nestedCategories} />
           <SearchInput />
