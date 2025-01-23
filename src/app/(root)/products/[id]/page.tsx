@@ -25,8 +25,9 @@ export default async function ProductDetailsPage(props: {
   return (
     <ContentContainer>
       <ProductBreadcrumb productId={productId} className="my-5" />
-      <ProductInformation productId={productId} variantId={variantId} />
-      <Suspense fallback={<ProductInformationSkeleton />}></Suspense>
+      <Suspense fallback={<ProductInformationSkeleton />}>
+        <ProductInformation productId={productId} variantId={variantId} />
+      </Suspense>
     </ContentContainer>
   );
 }
