@@ -4,10 +4,11 @@ import {
   HighlightedProducts,
   HighlightedProductsSkeleton
 } from '@modules/products/components/highlighted-products';
-import { productsService } from '@modules/products/service';
+import { srProductsService } from '@modules/products/services';
 
 export async function BestSellersProducts() {
-  const { data: paginatedBestSellers } = await productsService.getBestSellers();
+  const { data: paginatedBestSellers } =
+    await srProductsService.getBestSellers();
 
   return (
     <HighlightedProducts

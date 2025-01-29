@@ -1,20 +1,17 @@
-import 'server-only';
+import { CategoryPathItem, ProductCatalogItem } from '@modules/products/types';
 
+import { clientFetcher } from '@libs/client-fetcher';
 import { serverFetcher } from '@libs/server-fetcher';
-import { Paginated, SuccessResponse } from '@libs/types/http';
+import { HttpClient, Paginated, SuccessResponse } from '@libs/types/http';
 import { Product, ProductVariant } from '@libs/types/models';
 
-import {
-  CategoryPathItem,
-  ProductCatalogItem,
-  ProductVariantDetails
-} from './types';
-
 class ProductsService {
+  constructor(private readonly httpClient: HttpClient) {}
+
   private baseUrl = '/products';
 
   async getCatalog() {
-    const response = await serverFetcher.get<
+    const response = await this.httpClient.get<
       SuccessResponse<Paginated<ProductCatalogItem>>
     >(`${this.baseUrl}/catalog`);
 
@@ -22,7 +19,7 @@ class ProductsService {
   }
 
   async getNewArrivals() {
-    const response = await serverFetcher.get<
+    const response = await this.httpClient.get<
       SuccessResponse<Paginated<ProductCatalogItem>>
     >(`${this.baseUrl}/new-arrivals`);
 
@@ -30,7 +27,7 @@ class ProductsService {
   }
 
   async getBestSellers() {
-    const response = await serverFetcher.get<
+    const response = await this.httpClient.get<
       SuccessResponse<Paginated<ProductCatalogItem>>
     >(`${this.baseUrl}/best-sellers`);
 
@@ -38,7 +35,7 @@ class ProductsService {
   }
 
   async getCategoryPath(id: Product['id']) {
-    const response = await serverFetcher.get<
+    const response = await this.httpClient.get<
       SuccessResponse<CategoryPathItem[]>
     >(`${this.baseUrl}/${id}/category-path`);
 
@@ -54,16 +51,7 @@ class ProductsService {
   }
 }
 
-class ProductVariantService {
-  private baseUrl = '/product-variants';
+const srProductsService = new ProductsService(serverFetcher);
+const clProductsService = new ProductsService(clientFetcher);
 
-  async getVariantDetails(id: ProductVariant['id']) {
-    const response = await serverFetcher.get<
-      SuccessResponse<ProductVariantDetails>
-    >(`${this.baseUrl}/details/${id}`);
-
-    return response.data;
-  }
-}
-export const productsService = new ProductsService();
-export const productVariantService = new ProductVariantService();
+export { srProductsService, clProductsService };

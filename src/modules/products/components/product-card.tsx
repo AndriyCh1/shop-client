@@ -38,7 +38,7 @@ export function ProductCard({
 
   return (
     <div className="group">
-      <Link href={`/products/${id}?v=${variantId}`} target="_blank">
+      <Link href={`/products/${id}?v=${variantId}`}>
         <div className="relative overflow-hidden rounded-xl bg-muted p-7">
           <ProductImage imagePath={imagePath ?? undefined} alt={name} />
           <Button

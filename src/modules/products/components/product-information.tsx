@@ -6,8 +6,8 @@ import { ProductOptions } from '@modules/products/components/product-options';
 import { SalePriceBadge } from '@modules/products/components/sale-price-badge';
 import {
   productVariantService,
-  productsService
-} from '@modules/products/service';
+  srProductsService
+} from '@modules/products/services';
 
 import { Rating } from '@components/ui/rating';
 
@@ -24,7 +24,7 @@ export async function ProductInformation({
   variantId
 }: ProductInformationProps) {
   const { data: variants } =
-    await productsService.getProductVariants(productId);
+    await srProductsService.getProductVariants(productId);
 
   if (!variants.length) {
     return notFound();

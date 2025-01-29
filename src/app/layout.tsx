@@ -3,6 +3,10 @@ import { SessionProvider } from 'next-auth/react';
 
 import { getSession } from '@modules/auth/services';
 
+import { Toaster } from '@components/ui/toaster';
+
+import { ReactQueryClientProvider } from '@libs/providers/react-query-client-provider';
+
 import { integralCf, satoshi } from './fonts';
 import './globals.css';
 
@@ -23,13 +27,16 @@ export default async function GlobalLayout({
       <body
         className={`${satoshi.variable} ${integralCf.variable} antialiased`}
       >
-        <SessionProvider
-          basePath={'/api/auth'}
-          session={session}
-          key={session?.user.id} // Without the `key`, the session data is not updated on the client
-        >
-          {children}
-        </SessionProvider>
+        <ReactQueryClientProvider>
+          <SessionProvider
+            basePath={'/api/auth'}
+            session={session}
+            key={session?.user?.id} // Without the `key`, the session data is not updated on the client
+          >
+            {children}
+            <Toaster />
+          </SessionProvider>
+        </ReactQueryClientProvider>
       </body>
     </html>
   );

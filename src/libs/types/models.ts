@@ -38,3 +38,29 @@ export type Category = {
   description: string | null;
   parentId: number | null;
 };
+
+export type CartItem = {
+  id: number;
+  productVariantId: number;
+  quantity: number;
+  productVariant: {
+    id: number;
+    name: string;
+    description: string | null;
+    shortDescription: string | null;
+    salePrice: number;
+    productId: number | null;
+    product: {
+      id: number;
+      name: string;
+      description: string | null;
+      shortDescription: string;
+      rating: number;
+    };
+  } | null;
+};
+
+export type Cart = {
+  id: number;
+  cartItems: CartItem[];
+};

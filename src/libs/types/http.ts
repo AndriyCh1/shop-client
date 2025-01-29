@@ -1,3 +1,7 @@
+import { AxiosInstance } from 'axios';
+
+export type HttpClient = AxiosInstance;
+
 export interface SuccessResponse<T> {
   success: true;
   data: T;

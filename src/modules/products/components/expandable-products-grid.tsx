@@ -1,6 +1,6 @@
 'use client';
 
-import { useExpandableList } from '@hooks/useExpandableList';
+import { useExpandableList } from '@hooks/use-expandable-list';
 
 import { Button } from '@components/ui/button';
 

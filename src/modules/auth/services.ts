@@ -5,6 +5,8 @@ import Credentials from 'next-auth/providers/credentials';
 import { AuthResponse, SignUpData } from '@modules/auth/types';
 import { GetUserResponse } from '@modules/users/types';
 
+import { getIsTokenValid } from '@libs/utils/jwt';
+
 // NOTE: Workaround for handling Auth.js errors
 class InvalidLoginError extends AuthError {
   code = 'invalid_login';
@@ -50,7 +52,6 @@ export const {
 
           return response;
         } catch (error) {
-          console.error('Error logging in: ', error);
           if (isAxiosError(error)) {
             throw new InvalidLoginError(error.response?.data.message);
           }
@@ -61,12 +62,6 @@ export const {
     })
   ],
   basePath: '/api/auth',
-  session: {
-    strategy: 'jwt',
-    // NOTE: The value is that long, because we handle tokens expiration ourselves in our 3rd-party API.
-    // Would be better to sync this expiration with token expiration from the API
-    maxAge: 60 * 60 * 24 * 30 * 6
-  },
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       if (user) {
@@ -80,9 +75,33 @@ export const {
       return token;
     },
 
+    async authorized({ auth }) {
+      if (!auth?.user || !auth?.user?.refreshToken) {
+        return false;
+      }
+
+      const isTokenValid = getIsTokenValid(auth.user.refreshToken);
+
+      if (!isTokenValid) {
+        return false;
+      }
+
+      return true;
+    },
+
     async session({ session, token }) {
+      if (!token.user) {
+        return { ...session, user: null };
+      }
+
+      const isTokenValid = getIsTokenValid(token.user.refreshToken);
+
+      if (!isTokenValid) {
+        return { ...session, user: null };
+      }
+
       if (session?.user) {
-        return { ...session, user: token.user as User };
+        return { ...session, user: token.user };
       }
 
       return session;
@@ -99,25 +118,4 @@ export async function signUp(credentials: SignUpData) {
   );
 
   return response.data;
-}
-
-declare module 'next-auth' {
-  interface Session {
-    user: User;
-  }
-
-  interface JWT {
-    accessToken?: string;
-    refreshToken?: string;
-  }
-
-  interface User {
-    id?: string;
-    email?: string | null;
-    firstName?: string;
-    lastName?: string;
-    role?: string;
-    refreshToken?: string;
-    accessToken?: string;
-  }
 }

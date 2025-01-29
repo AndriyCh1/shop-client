@@ -1,6 +1,6 @@
 'use client';
 
-import { useOptionSelector } from '@hooks/useOptionSelector';
+import { useOptionSelector } from '@hooks/use-option-selector';
 
 type Option = string;
 

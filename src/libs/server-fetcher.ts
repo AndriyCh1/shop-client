@@ -4,13 +4,15 @@ import { redirect } from 'next/navigation';
 import { getSession, updateSession } from '@modules/auth/services';
 import { AuthResponse } from '@modules/auth/types';
 
+import { HttpClient } from '@libs/types/http';
+
 const BASE_SERVER_URL = process.env.SERVER_URL;
 
 async function handleRetryRequest(request: AxiosRequestConfig) {
   const session = await getSession();
 
-  if (!session?.user) {
-    throw new Error('Not authenticated');
+  if (!session?.user?.id) {
+    return redirect('/sign-in');
   }
 
   try {
@@ -44,7 +46,11 @@ async function handleRetryRequest(request: AxiosRequestConfig) {
 function initInterceptors(axiosInstance: AxiosInstance) {
   axiosInstance.interceptors.request.use(async (config) => {
     const session = await getSession();
-    config.headers.Authorization = `Bearer ${session?.user.accessToken}`;
+
+    if (session?.user?.accessToken) {
+      config.headers.Authorization = `Bearer ${session.user.accessToken}`;
+    }
+
     return config;
   });
 
@@ -70,6 +76,6 @@ function initInterceptors(axiosInstance: AxiosInstance) {
   return axiosInstance;
 }
 
-export const serverFetcher = initInterceptors(
+export const serverFetcher: HttpClient = initInterceptors(
   axios.create({ baseURL: BASE_SERVER_URL })
 );

@@ -4,11 +4,12 @@ import {
   HighlightedProducts,
   HighlightedProductsSkeleton
 } from '@modules/products/components/highlighted-products';
-import { productsService } from '@modules/products/service';
+import { srProductsService } from '@modules/products/services';
 
 // TODO: ISR + Daily revalidation
 export async function NewArrivalsProducts() {
-  const { data: paginatedNewArrivals } = await productsService.getNewArrivals();
+  const { data: paginatedNewArrivals } =
+    await srProductsService.getNewArrivals();
 
   return (
     <HighlightedProducts

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { productsService } from '@modules/products/service';
+import { srProductsService } from '@modules/products/services';
 
 import {
   Breadcrumb,
@@ -23,7 +23,7 @@ export async function ProductBreadcrumb({
   className
 }: ProductBreadcrumbProps) {
   const { data: pathToCategory } =
-    await productsService.getCategoryPath(productId);
+    await srProductsService.getCategoryPath(productId);
 
   const pathToCategoryBreadcrumbs = pathToCategory
     .sort((a, b) => (b.depth > a.depth ? 1 : -1))

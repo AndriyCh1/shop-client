@@ -1,4 +1,3 @@
-import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -9,7 +8,13 @@ import { ContentContainer } from '@components/shared/content-container';
 
 import { nestCategories } from '@libs/utils/categories';
 
-import { BurgerMenu, NavigationMenu, SearchInput, UserButton } from './';
+import {
+  BurgerMenu,
+  NavigationMenu,
+  SearchInput,
+  ShoppingCart,
+  UserButton
+} from './';
 
 export async function Header() {
   const categories = await categoriesService.getCategoriesHierarchy();

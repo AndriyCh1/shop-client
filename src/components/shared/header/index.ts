@@ -7,3 +7,4 @@ export * from './navigation-menu';
 export * from './burger-menu';
 export * from './user-button';
 export * from './nav-link';
+export * from './shopping-cart';
