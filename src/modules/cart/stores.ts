@@ -17,6 +17,7 @@ interface State {
 interface Actions {
   addToCart: (item: ProductVariant, quantity?: number) => void;
   removeFromCart: (item: ProductVariant) => void;
+  findProductById: (id: ProductVariant['id']) => CartProduct | undefined;
 }
 
 export type StoreWithPersist<T> = Mutate<
@@ -65,10 +66,11 @@ export const useCartStore = create(
           totalItems: state.totalItems - 1,
           totalPrice: state.totalPrice - product.salePrice
         }));
+      },
+      findProductById: (id: number) => {
+        return get().products.find((item) => item.product.id === id);
       }
     }),
-    {
-      name: STORAGE_KEY
-    }
+    { name: STORAGE_KEY }
   )
 );

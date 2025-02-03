@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 import { cartKeys } from '@modules/cart/query-keys';
 import { clCartService } from '@modules/cart/services';
@@ -11,7 +12,7 @@ import { useCartStore } from '@modules/cart/stores';
 export function ShoppingCart() {
   const clientCart = useCartStore();
   const session = useSession();
-
+  const isAuthenticated = !!session.data;
   const {
     data: serverCart,
     isPending: isServerCartPending,
@@ -21,7 +22,7 @@ export function ShoppingCart() {
   } = useQuery({
     queryKey: cartKeys.cart(),
     queryFn: () => clCartService.getCart(),
-    enabled: !!session?.data
+    enabled: isAuthenticated
   });
 
   if (isError) {
@@ -33,7 +34,7 @@ export function ShoppingCart() {
     : clientCart.totalItems;
 
   return (
-    <div className="relative">
+    <Link href="/cart" className="relative">
       <ShoppingCartIcon />
       {cartItemsCount > 0 &&
         (fetchStatus === 'idle' || !isServerCartPending) && (
@@ -41,6 +42,6 @@ export function ShoppingCart() {
             {cartItemsCount}
           </span>
         )}
-    </div>
+    </Link>
   );
 }

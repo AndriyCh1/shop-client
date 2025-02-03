@@ -41,7 +41,6 @@ export type Category = {
 
 export type CartItem = {
   id: number;
-  productVariantId: number;
   quantity: number;
   productVariant: {
     id: number;
