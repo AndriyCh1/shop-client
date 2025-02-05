@@ -15,7 +15,9 @@ export function Placeholder({ className, imageClassName }: PlaceholderProps) {
         className
       )}
     >
-      <ImageIcon className={cn('h-12 w-12', imageClassName)} />
+      <ImageIcon
+        className={cn('h-12 w-12 text-muted-foreground', imageClassName)}
+      />
     </div>
   );
 }

@@ -7,6 +7,7 @@ export const PUBLIC_ROUTES = [
   SIGN_UP,
   '/category',
   '/products',
+  '/cart',
   '/api/auth/callback/google',
   '/api/auth/callback/github'
 ];

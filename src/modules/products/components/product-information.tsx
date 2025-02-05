@@ -55,7 +55,13 @@ export async function ProductInformation({
         />
         <p className="mt-2 text-muted-foreground">{variant.description}</p>
         <ProductOptions variants={variants} currentVariant={variant} />
-        <AddToCart className="mt-5" variant={variant} />
+        <AddToCart
+          className="mt-5"
+          variant={{
+            ...variant,
+            image: variant.images.length ? variant.images[0] : undefined
+          }}
+        />
       </div>
     </div>
   );

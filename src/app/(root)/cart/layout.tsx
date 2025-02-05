@@ -1,6 +1,6 @@
 import { Separator } from '@components/ui/separator';
 
-export default async function ProductsLayout({
+export default async function CartLayout({
   children
 }: {
   children: React.ReactNode;

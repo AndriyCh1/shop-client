@@ -1,23 +1,36 @@
 import { Mutate, StoreApi, create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { ProductVariant } from '@libs/types/models';
+import { UpdateCartData } from '@modules/cart/types';
 
-interface CartProduct {
-  product: ProductVariant;
+import { ProductVariant } from '@libs/types/models';
+import { generateId } from '@libs/utils/generators';
+
+export interface CartProduct {
+  id: ProductVariant['id'];
+  name: ProductVariant['name'];
+  salePrice: ProductVariant['salePrice'];
+  attributes: ProductVariant['attributes'];
+  image?: string;
+}
+
+export interface CartItem {
+  id: string;
+  product: CartProduct;
   quantity: number;
 }
 
 interface State {
-  products: CartProduct[];
+  items: CartItem[];
   totalItems: number;
   totalPrice: number;
 }
 
 interface Actions {
-  addToCart: (item: ProductVariant, quantity?: number) => void;
-  removeFromCart: (item: ProductVariant) => void;
-  findProductById: (id: ProductVariant['id']) => CartProduct | undefined;
+  addItem: (product: CartProduct, quantity?: number) => void;
+  removeItem: (id: CartItem['id']) => void;
+  updateItem: (id: CartItem['id'], data: UpdateCartData) => void;
+  findByProductId: (id: CartProduct['id']) => CartItem | undefined;
 }
 
 export type StoreWithPersist<T> = Mutate<
@@ -30,11 +43,11 @@ export const STORAGE_KEY = 'cart';
 export const useCartStore = create(
   persist<State & Actions>(
     (set, get) => ({
-      products: [],
+      items: [],
       totalItems: 0,
       totalPrice: 0,
-      addToCart: (product: ProductVariant, quantity = 1) => {
-        const cart = get().products;
+      addItem: (product: CartProduct, quantity = 1) => {
+        const cart = get().items;
         const cartItem = cart.find((item) => item.product.id === product.id);
 
         if (cartItem) {
@@ -45,30 +58,43 @@ export const useCartStore = create(
           );
 
           set((state) => ({
-            products: updatedCart,
+            items: updatedCart,
             totalItems: state.totalItems,
             totalPrice: state.totalPrice + product.salePrice * quantity
           }));
         } else {
+          const id = generateId();
+
           set((state) => ({
             ...state,
-            products: [...state.products, { product, quantity }],
+            items: [...state.items, { id, product, quantity }],
             totalItems: state.totalItems + quantity,
             totalPrice: state.totalPrice + product.salePrice * quantity
           }));
         }
       },
-      removeFromCart: (product: ProductVariant) => {
+      updateItem: (id: CartItem['id'], data: UpdateCartData) => {
         set((state) => ({
-          products: state.products.filter(
-            (item) => item.product.id !== product.id
+          items: state.items.map((item) =>
+            item.id === id ? { ...item, quantity: data.quantity } : item
           ),
-          totalItems: state.totalItems - 1,
-          totalPrice: state.totalPrice - product.salePrice
+          totalItems: state.totalItems,
+          totalPrice: state.totalPrice
         }));
       },
-      findProductById: (id: number) => {
-        return get().products.find((item) => item.product.id === id);
+      removeItem: (id: CartItem['id']) => {
+        const cartItem = get().items.find((item) => item.id === id);
+
+        if (!cartItem) return;
+
+        set((state) => ({
+          items: state.items.filter((item) => item.id !== id),
+          totalItems: state.totalItems - 1,
+          totalPrice: state.totalPrice - cartItem.product.salePrice
+        }));
+      },
+      findByProductId: (id: CartProduct['id']) => {
+        return get().items.find((item) => item.product.id === id);
       }
     }),
     { name: STORAGE_KEY }

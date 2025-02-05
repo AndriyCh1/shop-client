@@ -1,3 +1,5 @@
+import { UpdateCartData } from '@modules/cart/types';
+
 import { clientFetcher } from '@libs/client-fetcher';
 import { serverFetcher } from '@libs/server-fetcher';
 import { HttpClient, SuccessResponse } from '@libs/types/http';
@@ -9,7 +11,7 @@ export class CartService {
   constructor(private readonly httpClient: HttpClient) {}
 
   async getCart() {
-    const response = await this.httpClient.get<SuccessResponse<Cart>>(
+    const response = await this.httpClient.get<SuccessResponse<Cart | null>>(
       this.baseUrl
     );
 
@@ -25,8 +27,20 @@ export class CartService {
     return response.data;
   }
 
-  async removeFromCart(productVariantId: string) {
-    const response = await this.httpClient.delete(`/cart/${productVariantId}`);
+  async updateItem(itemId: number, data: UpdateCartData) {
+    const response = await this.httpClient.patch(
+      `${this.baseUrl}/items/${itemId}`,
+      data
+    );
+
+    return response.data;
+  }
+
+  async removeItem(itemId: number) {
+    const response = await this.httpClient.delete(
+      `${this.baseUrl}/items/${itemId}`
+    );
+
     return response.data;
   }
 }

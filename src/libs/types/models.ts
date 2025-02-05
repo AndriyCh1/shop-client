@@ -12,8 +12,8 @@ export type Product = {
   salePrice: number;
   comparedPrice: number | null;
   image: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ProductVariant = {
@@ -28,8 +28,8 @@ export type ProductVariant = {
   sku: string | null;
   displayOrder: number;
   attributes: Record<ProductAttributeKey, string>;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Category = {
@@ -39,24 +39,29 @@ export type Category = {
   parentId: number | null;
 };
 
+export type ProductImage = {
+  id: number;
+  productId: number;
+  productVariantId: number | null;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type CartItem = {
   id: number;
   quantity: number;
   productVariant: {
     id: number;
+    productId: number;
     name: string;
     description: string | null;
-    shortDescription: string | null;
+    shortDescription: string;
     salePrice: number;
-    productId: number | null;
-    product: {
-      id: number;
-      name: string;
-      description: string | null;
-      shortDescription: string;
-      rating: number;
-    };
-  } | null;
+    rating: number;
+    attributes: Record<ProductAttributeKey, string>;
+    images: ProductImage[];
+  };
 };
 
 export type Cart = {
