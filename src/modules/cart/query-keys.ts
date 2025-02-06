@@ -1,3 +1,4 @@
 export const cartKeys = {
-  cart: () => ['cart']
+  cart: () => ['cart'],
+  cartProductVariants: () => [...cartKeys.cart(), 'product-variants']
 };

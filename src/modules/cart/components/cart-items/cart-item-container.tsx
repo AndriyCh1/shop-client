@@ -13,7 +13,8 @@ export interface Item {
     name: string;
     price: number;
     attributes: Record<string, string>;
-    image: string;
+    image?: string;
+    stockQuantity: number;
   };
   quantity: number;
 }
@@ -70,6 +71,7 @@ export function CartItemContainer({
           onChange={(value) => {
             handleUpdateItem({ quantity: value });
           }}
+          max={item.product.stockQuantity}
         />
       </div>
     );

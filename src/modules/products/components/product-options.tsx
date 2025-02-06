@@ -7,8 +7,8 @@ import { ColorSelector } from '@modules/products/components/option-selectors/col
 import { SizeSelector } from '@modules/products/components/option-selectors/size-selector';
 import { ProductAttributeKey } from '@modules/products/consts';
 import {
-  findVariantByAttributes,
-  getVariantMatchingOptions
+  getVariantMatchingOptions,
+  isMatchingAttributes
 } from '@modules/products/utils';
 
 import { Separator } from '@components/ui/separator';
@@ -16,9 +16,17 @@ import { Separator } from '@components/ui/separator';
 import { ProductVariant } from '@libs/types/models';
 import { groupByKeys } from '@libs/utils/objects';
 
+interface ProductOptionVariant {
+  id: ProductVariant['id'];
+  productId: ProductVariant['productId'];
+  name: ProductVariant['name'];
+  attributes: ProductVariant['attributes'];
+  stockQuantity: ProductVariant['stockQuantity'];
+}
+
 export interface ProductOptionsProps {
-  variants: ProductVariant[];
-  currentVariant: ProductVariant;
+  variants: ProductOptionVariant[];
+  currentVariant: ProductOptionVariant;
 }
 
 export function ProductOptions({
@@ -32,9 +40,11 @@ export function ProductOptions({
   const availableOptions = getVariantMatchingOptions(variants, currentVariant);
 
   const handleSelectNewOption = (key: ProductAttributeKey, value: string) => {
-    const nextVariant = findVariantByAttributes(variants, {
-      ...currentVariant.attributes,
-      [key]: value
+    const nextVariant = variants.find((v) => {
+      return isMatchingAttributes(v.attributes, {
+        ...currentVariant.attributes,
+        [key]: value
+      });
     });
 
     if (nextVariant) {

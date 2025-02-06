@@ -2,14 +2,11 @@ import { ProductAttributeKey } from '@modules/products/consts';
 
 import { ProductVariant } from '@libs/types/models';
 
-export function findVariantByAttributes(
-  variants: ProductVariant[],
-  attributes: ProductVariant['attributes']
+export function isMatchingAttributes(
+  attributesA: ProductVariant['attributes'],
+  attributesB: ProductVariant['attributes']
 ) {
-  return variants.find(
-    (variant) =>
-      JSON.stringify(variant.attributes) === JSON.stringify(attributes)
-  );
+  return JSON.stringify(attributesA) === JSON.stringify(attributesB);
 }
 
 export function hasAttributeOverlap(
@@ -26,9 +23,14 @@ export function hasAttributeOverlap(
   });
 }
 
+interface MatchingOptionVariant {
+  attributes: ProductVariant['attributes'];
+  stockQuantity: ProductVariant['stockQuantity'];
+}
+
 export function getVariantMatchingOptions(
-  variants: ProductVariant[],
-  variant: ProductVariant
+  variants: MatchingOptionVariant[],
+  variant: MatchingOptionVariant
 ) {
   return variants.reduce(
     (acc, v) => {

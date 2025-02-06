@@ -33,7 +33,7 @@ export function ServerCartItems({ className }: ServerCartItemsProps) {
   }
 
   const mappedCartItems =
-    serverCart.data?.cartItems.map((item) => {
+    serverCart.data?.cartItems.map((item): Item => {
       const sortedImagesByCreationDate = item.productVariant.images.toSorted(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
@@ -47,6 +47,7 @@ export function ServerCartItems({ className }: ServerCartItemsProps) {
           name: item.productVariant.name,
           price: item.productVariant.salePrice,
           attributes: item.productVariant.attributes,
+          stockQuantity: item.productVariant.stockQuantity,
           image:
             sortedImagesByCreationDate.length > 0
               ? sortedImagesByCreationDate[0].image

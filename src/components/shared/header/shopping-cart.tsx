@@ -8,8 +8,8 @@ import { useGetCart } from '@modules/cart/queries';
 import { useCartStore } from '@modules/cart/stores';
 
 export function ShoppingCart() {
-  const clientCart = useCartStore();
   const session = useSession();
+  const clientCart = useCartStore();
   const isAuthenticated = !!session.data;
   const {
     data: serverCart,
@@ -22,9 +22,9 @@ export function ShoppingCart() {
     throw serverCartError;
   }
 
-  const cartItemsCount = serverCart
-    ? serverCart.data?.cartItems.length || 0
-    : clientCart.totalItems;
+  const cartItemsCount = isAuthenticated
+    ? serverCart?.data?.cartItems.length || 0
+    : clientCart.items.length;
 
   return (
     <Link href="/cart" className="relative">

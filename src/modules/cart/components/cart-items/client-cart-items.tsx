@@ -1,5 +1,7 @@
+import { useGetCartProductVariants } from '@modules/cart/queries';
 import { CartItem, useCartStore } from '@modules/cart/stores';
 import { UpdateCartData } from '@modules/cart/types';
+import { mergeCartItemsWithVariants } from '@modules/cart/utils';
 
 import { Item } from './cart-item-container';
 import { CartItemsContainer } from './cart-items-container';
@@ -9,21 +11,26 @@ export interface ClientCartItemsProps {
 }
 
 export function ClientCartItems({ className }: ClientCartItemsProps) {
-  const {
-    items,
-    removeItem: removeFromCart,
-    updateItem: updateCartItem
-  } = useCartStore();
+  const { items, removeItem, updateItem } = useCartStore();
 
   const handleRemoveItem = (id: Item['id']) => {
-    removeFromCart(id as CartItem['id']);
+    removeItem(id as CartItem['id']);
   };
 
   const handleUpdateItem = (id: Item['id'], data: UpdateCartData) => {
-    updateCartItem(id as CartItem['id'], data);
+    updateItem(id as CartItem['id'], data);
   };
 
-  const mappedCartItems = items.map((item) => {
+  const { data: productVariants } = useGetCartProductVariants({
+    ids: items.map((item) => item.productVariantId)
+  });
+
+  const extendedItems = mergeCartItemsWithVariants(
+    items,
+    productVariants ? productVariants.data : []
+  );
+
+  const mappedCartItems = extendedItems.map((item): Item => {
     return {
       id: item.id,
       quantity: item.quantity,
@@ -31,10 +38,13 @@ export function ClientCartItems({ className }: ClientCartItemsProps) {
         id: item.product.id,
         name: item.product.name,
         price: item.product.salePrice,
-        attributes: item.product.attributes,
-        image: item.product.image
+        attributes: item.product.attributes as Record<string, string>,
+        stockQuantity: item.product.stockQuantity,
+        image: item.product.images.length
+          ? item.product.images[0].image
+          : undefined
       }
-    } as Item;
+    };
   });
 
   return (

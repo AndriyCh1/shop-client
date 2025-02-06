@@ -7,15 +7,22 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { useAddItemToCart, useGetCart } from '@modules/cart/queries';
-import { CartProduct, useCartStore } from '@modules/cart/stores';
+import { useCartStore } from '@modules/cart/stores';
 
 import { Button } from '@components/ui/button';
 import { QuantityInput } from '@components/ui/quantity-input';
 
+import { ProductVariant } from '@libs/types/models';
 import { cn } from '@libs/utils/tw-merge';
 
 export interface AddToCartProps {
-  variant: CartProduct;
+  variant: {
+    id: ProductVariant['id'];
+    name: ProductVariant['name'];
+    salePrice: ProductVariant['salePrice'];
+    attributes: ProductVariant['attributes'];
+    image?: string;
+  };
   className?: string;
 }
 
@@ -35,7 +42,7 @@ export function AddToCart({ variant, className }: AddToCartProps) {
     if (isAuthenticated) {
       addToCartMutation.mutate({ variantId: variant.id, quantity });
     } else {
-      cartStore.addItem(variant, quantity);
+      cartStore.addItem(variant.id, quantity);
     }
   };
 
@@ -43,7 +50,7 @@ export function AddToCart({ variant, className }: AddToCartProps) {
     (item) => item.productVariant?.id === variant.id
   );
 
-  const isInClientCart = !!cartStore.findByProductId(variant.id);
+  const isInClientCart = !!cartStore.findByProductVariantId(variant.id);
 
   const renderGoToCartButton = () => {
     return (

@@ -1,4 +1,6 @@
+import { useGetCartProductVariants } from '@modules/cart/queries';
 import { useCartStore } from '@modules/cart/stores';
+import { mergeCartItemsWithVariants } from '@modules/cart/utils';
 
 import { OrderSummaryContainer } from './order-summary-container';
 
@@ -11,11 +13,20 @@ interface ClientOrderSummaryProps {
 export function ClientOrderSummary({ className }: ClientOrderSummaryProps) {
   const { items } = useCartStore();
 
+  const { data: productVariants } = useGetCartProductVariants({
+    ids: items.map((item) => item.productVariantId)
+  });
+
   if (!items?.length) {
     return null;
   }
 
-  const subTotal = items.reduce((total, item) => {
+  const extendedItems = mergeCartItemsWithVariants(
+    items,
+    productVariants ? productVariants.data : []
+  );
+
+  const subTotal = extendedItems.reduce((total, item) => {
     return total + item.product.salePrice * item.quantity;
   }, 0);
 

@@ -37,3 +37,7 @@ export type ProductVariantDetails = {
 };
 
 export type CategoryPathItem = CategoryHierarchyItem;
+
+export type GetVariantsOptions = {
+  ids?: ProductVariant['id'][];
+};

@@ -2,6 +2,9 @@ import { useToast } from '@hooks/use-toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 
+import { clProductVariantService } from '@modules/products/services';
+import { GetVariantsOptions } from '@modules/products/types';
+
 import { ProductVariant } from '@libs/types/models';
 
 import { cartKeys } from './query-keys';
@@ -17,6 +20,19 @@ export const useGetCart = (options: UseGetCartOptions = {}) => {
     ...options,
     queryKey: cartKeys.cart(),
     queryFn: () => clCartService.getCart()
+  });
+};
+
+interface UseGetCartProductVariantsData {
+  ids: GetVariantsOptions['ids'];
+}
+
+export const useGetCartProductVariants = (
+  data: UseGetCartProductVariantsData
+) => {
+  return useQuery({
+    queryKey: cartKeys.cartProductVariants(),
+    queryFn: () => clProductVariantService.getVariants(data)
   });
 };
 

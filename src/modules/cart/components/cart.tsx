@@ -1,9 +1,11 @@
 'use client';
 
 import { useIsMounted } from '@hooks/use-is-mounted';
+import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
 import { useGetCart } from '@modules/cart/queries';
+import { cartKeys } from '@modules/cart/query-keys';
 import { useCartStore } from '@modules/cart/stores';
 
 import { CartItems } from './cart-items';
@@ -23,13 +25,18 @@ export function Cart({ className }: CartProps) {
 
   const cartStore = useCartStore();
 
+  const qetCartProductVariantsQuery = useQuery({
+    queryKey: cartKeys.cartProductVariants(),
+    enabled: false // We don't want to run this query, we just want to check it's status
+  });
+
   if (!useIsMounted()) return null;
 
-  if (getCartQuery.isLoading) {
+  if (getCartQuery.isLoading || qetCartProductVariantsQuery.isLoading) {
     return <CartSkeleton />;
   }
 
-  const isServerCartEmpty = !getCartQuery.isPending && !serverCart?.data;
+  const isServerCartEmpty = !getCartQuery.isLoading && !serverCart?.data;
   const isClientCartEmpty = !cartStore.items.length;
 
   if (
@@ -54,7 +61,7 @@ export function Cart({ className }: CartProps) {
 
 export function CartSkeleton() {
   return (
-    <div className="flex gap-3">
+    <div className="mt-5 flex gap-3">
       <div className="h-[500px] w-3/5 animate-pulse rounded bg-muted"></div>
       <div className="h-[500px] w-2/5 animate-pulse rounded bg-muted"></div>
     </div>

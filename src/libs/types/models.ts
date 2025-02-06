@@ -19,15 +19,16 @@ export type Product = {
 export type ProductVariant = {
   id: number;
   productId: number;
-  name: string | null;
+  name: string;
   description: string | null;
-  shortDescription: string | null;
+  shortDescription: string;
   salePrice: number;
   comparedPrice: number | null;
   stockQuantity: number;
   sku: string | null;
   displayOrder: number;
   attributes: Record<ProductAttributeKey, string>;
+  images: ProductImage[];
   createdAt: string;
   updatedAt: string;
 };
@@ -61,6 +62,7 @@ export type CartItem = {
     rating: number;
     attributes: Record<ProductAttributeKey, string>;
     images: ProductImage[];
+    stockQuantity: number;
   };
 };
 

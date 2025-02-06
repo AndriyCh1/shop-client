@@ -5,7 +5,7 @@ import { ProductDetailsImages } from '@modules/products/components/product-detai
 import { ProductOptions } from '@modules/products/components/product-options';
 import { SalePriceBadge } from '@modules/products/components/sale-price-badge';
 import {
-  productVariantService,
+  srProductVariantService,
   srProductsService
 } from '@modules/products/services';
 
@@ -36,7 +36,7 @@ export async function ProductInformation({
   }
 
   const { data: variant } =
-    await productVariantService.getVariantDetails(+variantId);
+    await srProductVariantService.getVariantDetails(+variantId);
 
   return (
     <div className="gap-10 md:flex md:justify-between">
