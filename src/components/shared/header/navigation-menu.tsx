@@ -8,7 +8,8 @@ import {
 
 import { NestedCategory } from '@libs/utils/categories';
 
-import { CategoriesPanel, NavLink } from './';
+import { CategoriesPanel } from './categories-panel';
+import { NavLink } from './nav-link';
 
 export interface CategoriesMenuProps {
   categories: NestedCategory[];

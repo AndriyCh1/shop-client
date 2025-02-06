@@ -4,7 +4,8 @@ import { UserRound } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
-import { AuthModal, SignOutButton } from '@modules/auth/components';
+import { AuthModal } from '@modules/auth/components/auth-modal';
+import { SignOutButton } from '@modules/auth/components/sign-out-button';
 
 import {
   DropdownMenu,

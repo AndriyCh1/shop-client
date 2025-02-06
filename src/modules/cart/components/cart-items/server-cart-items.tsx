@@ -1,10 +1,8 @@
 'use client';
 
-import {
-  useGetCart,
-  useRemoveCartItem,
-  useUpdateCartItem
-} from '@modules/cart/queries';
+import { useGetCart } from '@modules/cart/queries/use-get-cart';
+import { useRemoveCartItem } from '@modules/cart/queries/use-remove-cart-item';
+import { useUpdateCartItem } from '@modules/cart/queries/use-update-cart-item';
 import { UpdateCartData } from '@modules/cart/types';
 
 import { Item } from './cart-item-container';

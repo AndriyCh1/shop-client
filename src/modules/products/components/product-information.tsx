@@ -4,10 +4,8 @@ import { AddToCart } from '@modules/products/components/add-to-cart';
 import { ProductDetailsImages } from '@modules/products/components/product-details-images';
 import { ProductOptions } from '@modules/products/components/product-options';
 import { SalePriceBadge } from '@modules/products/components/sale-price-badge';
-import {
-  srProductVariantService,
-  srProductsService
-} from '@modules/products/services';
+import { srProductVariantService } from '@modules/products/services/product-variants-service';
+import { srProductsService } from '@modules/products/services/products-service';
 
 import { Rating } from '@components/ui/rating';
 
@@ -59,6 +57,7 @@ export async function ProductInformation({
           className="mt-5"
           variant={{
             ...variant,
+            // FIXME: Not consistent with server response
             image: variant.images.length ? variant.images[0] : undefined
           }}
         />

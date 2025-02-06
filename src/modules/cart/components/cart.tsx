@@ -4,9 +4,9 @@ import { useIsMounted } from '@hooks/use-is-mounted';
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
-import { useGetCart } from '@modules/cart/queries';
-import { cartKeys } from '@modules/cart/query-keys';
-import { useCartStore } from '@modules/cart/stores';
+import { cartKeys } from '@modules/cart/consts/query-keys';
+import { useGetCart } from '@modules/cart/queries/use-get-cart';
+import { useCartStore } from '@modules/cart/stores/use-cart-store';
 
 import { CartItems } from './cart-items';
 import { EmptyCart } from './empty-cart';
@@ -16,6 +16,8 @@ export interface CartProps {
   className?: string;
 }
 
+// FIXME: Loading, skeletons, refactor naming - cart store, local cart, server cart
+// Stock availability, error messages, optimistic updates
 export function Cart({ className }: CartProps) {
   const isAuthenticated = !!useSession().data;
 

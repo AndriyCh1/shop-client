@@ -3,7 +3,7 @@
 import { isAxiosError } from 'axios';
 import { AuthError } from 'next-auth';
 
-import * as auth from './services';
+import * as auth from './services/auth-service';
 import { SignInData, SignUpData } from './types';
 
 export async function signOut() {

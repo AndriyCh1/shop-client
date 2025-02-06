@@ -1,10 +1,9 @@
 import {
   ExpandableProductsGrid,
-  ExpandableProductsGridSkeleton,
-  ProductCardProps,
-  ProductsGrid,
-  ProductsGridSkeleton
-} from './';
+  ExpandableProductsGridSkeleton
+} from './expandable-products-grid';
+import { ProductCardProps } from './product-card';
+import { ProductsGrid, ProductsGridSkeleton } from './products-grid';
 
 export interface HighlightedProductsProps {
   className?: string;

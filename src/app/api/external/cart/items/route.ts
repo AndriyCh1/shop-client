@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { srCartService } from '@modules/cart/services';
+import { srCartService } from '@modules/cart/services/cart-service';
 
 export async function POST(request: NextRequest) {
   try {

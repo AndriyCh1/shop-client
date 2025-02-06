@@ -4,8 +4,8 @@ import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
-import { useGetCart } from '@modules/cart/queries';
-import { useCartStore } from '@modules/cart/stores';
+import { useGetCart } from '@modules/cart/queries/use-get-cart';
+import { useCartStore } from '@modules/cart/stores/use-cart-store';
 
 export function ShoppingCart() {
   const session = useSession();

@@ -1,4 +1,4 @@
-import { HighlightedProductsSection } from '@modules/products/components';
+import { HighlightedProductsSection } from '@modules/products/components/highlighted-products-section';
 
 import { HeroSection } from '@components/shared/hero-section';
 

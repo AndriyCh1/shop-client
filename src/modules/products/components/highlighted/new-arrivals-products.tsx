@@ -4,7 +4,7 @@ import {
   HighlightedProducts,
   HighlightedProductsSkeleton
 } from '@modules/products/components/highlighted-products';
-import { srProductsService } from '@modules/products/services';
+import { srProductsService } from '@modules/products/services/products-service';
 
 // TODO: ISR + Daily revalidation
 export async function NewArrivalsProducts() {

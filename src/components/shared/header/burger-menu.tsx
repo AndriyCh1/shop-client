@@ -12,7 +12,7 @@ import {
 
 import { NestedCategory } from '@libs/utils/categories';
 
-import { CategoriesAccordion } from './';
+import { CategoriesAccordion } from './categories-accordion';
 
 export interface BurgerMenuProps {
   categories: NestedCategory[];

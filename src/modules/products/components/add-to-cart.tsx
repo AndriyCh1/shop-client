@@ -6,8 +6,9 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { useAddItemToCart, useGetCart } from '@modules/cart/queries';
-import { useCartStore } from '@modules/cart/stores';
+import { useAddItemToCart } from '@modules/cart/queries/use-add-item-to-cart';
+import { useGetCart } from '@modules/cart/queries/use-get-cart';
+import { useCartStore } from '@modules/cart/stores/use-cart-store';
 
 import { Button } from '@components/ui/button';
 import { QuantityInput } from '@components/ui/quantity-input';

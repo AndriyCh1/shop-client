@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import qs from 'qs';
 
-import { srProductVariantService } from '@modules/products/services';
+import { srProductVariantService } from '@modules/products/services/product-variants-service';
 import { GetVariantsOptions } from '@modules/products/types';
 
 export async function GET(request: NextRequest) {
