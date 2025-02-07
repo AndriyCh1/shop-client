@@ -27,10 +27,10 @@ export function UserButton() {
       {!isAuthenticated && (
         <button
           type="button"
-          className="rounded-full border border-transparent p-1.5 outline-none hover:border hover:border-secondary hover:bg-secondary"
+          className="hidden rounded-full border border-transparent p-1.5 outline-none hover:border hover:border-secondary hover:bg-secondary lg:block"
           onClick={() => setOpenAuthDialog(true)}
         >
-          <UserRound className="hidden lg:block" />
+          <UserRound />
         </button>
       )}
 
