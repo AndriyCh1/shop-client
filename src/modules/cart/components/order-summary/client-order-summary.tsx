@@ -1,5 +1,5 @@
-import { useGetCartProductVariants } from '@modules/cart/queries';
-import { useCartStore } from '@modules/cart/stores';
+import { useGetCartProductVariants } from '@modules/cart/queries/use-get-cart-product-variants';
+import { useCartStore } from '@modules/cart/stores/use-cart-store';
 import { mergeCartItemsWithVariants } from '@modules/cart/utils';
 
 import { OrderSummaryContainer } from './order-summary-container';

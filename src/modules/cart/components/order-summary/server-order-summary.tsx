@@ -1,4 +1,4 @@
-import { useGetCart } from '@modules/cart/queries';
+import { useGetCart } from '@modules/cart/queries/use-get-cart';
 
 import { OrderSummaryContainer } from './order-summary-container';
 

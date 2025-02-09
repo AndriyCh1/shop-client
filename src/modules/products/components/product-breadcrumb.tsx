@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { srProductsService } from '@modules/products/services';
+import { srProductsService } from '@modules/products/services/products-service';
 
 import {
   Breadcrumb,

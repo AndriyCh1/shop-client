@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { redirect } from 'next/navigation';
 
-import { getSession, updateSession } from '@modules/auth/services';
+import { getSession, updateSession } from '@modules/auth/services/auth-service';
 import { AuthResponse } from '@modules/auth/types';
 
 import { HttpClient } from '@libs/types/http';

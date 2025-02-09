@@ -1,13 +1,13 @@
-import { CartItem } from '@modules/cart/stores';
+import { ClientCartItem } from '@modules/cart/types';
 
 import { ProductVariant } from '@libs/types/models';
 
-export interface MergedCartItem extends CartItem {
+interface MergedCartItem extends ClientCartItem {
   product: ProductVariant;
 }
 
 export function mergeCartItemsWithVariants(
-  items: CartItem[],
+  items: ClientCartItem[],
   productVariants: ProductVariant[]
 ): MergedCartItem[] {
   const variantMap = new Map(

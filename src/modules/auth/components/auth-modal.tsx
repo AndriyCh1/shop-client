@@ -6,7 +6,8 @@ import {
 } from '@components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 
-import { SignInForm, SignUpForm } from './';
+import { SignInForm } from './sign-in-form';
+import { SignUpForm } from './sign-up-form';
 
 export type AuthModalProps = {
   open: boolean;

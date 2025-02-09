@@ -1,27 +1,23 @@
 import { Mutate, StoreApi, create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { UpdateCartData } from '@modules/cart/types';
+import { ClientCartItem, UpdateCartData } from '@modules/cart/types';
 
 import { ProductVariant } from '@libs/types/models';
 import { generateId } from '@libs/utils/generators';
 
-export interface CartItem {
-  id: string;
-  productVariantId: ProductVariant['id'];
-  quantity: number;
-}
-
 interface State {
-  items: CartItem[];
+  items: ClientCartItem[];
 }
 
 interface Actions {
   addItem: (productVariantId: ProductVariant['id'], quantity?: number) => void;
   removeItem: (id: string) => void;
   updateItem: (id: string, data: UpdateCartData) => void;
-  findItem: (id: string) => CartItem | undefined;
-  findByProductVariantId: (id: ProductVariant['id']) => CartItem | undefined;
+  findItem: (id: string) => ClientCartItem | undefined;
+  findByProductVariantId: (
+    id: ProductVariant['id']
+  ) => ClientCartItem | undefined;
 }
 
 export type StoreWithPersist<T> = Mutate<

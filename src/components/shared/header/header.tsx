@@ -2,19 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { categoriesService } from '@modules/categories/service';
+import { categoriesService } from '@modules/categories/services/categories-service';
 
 import { ContentContainer } from '@components/shared/content-container';
 
 import { nestCategories } from '@libs/utils/categories';
 
-import {
-  BurgerMenu,
-  NavigationMenu,
-  SearchInput,
-  ShoppingCart,
-  UserButton
-} from './';
+import { BurgerMenu } from './burger-menu';
+import { NavigationMenu } from './navigation-menu';
+import { SearchInput } from './search-input';
+import { ShoppingCart } from './shopping-cart';
+import { UserButton } from './user-button';
 
 export async function Header() {
   const categories = await categoriesService.getCategoriesHierarchy();

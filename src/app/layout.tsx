@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 
-import { getSession } from '@modules/auth/services';
+import { getSession } from '@modules/auth/services/auth-service';
 
 import { Toaster } from '@components/ui/toaster';
 

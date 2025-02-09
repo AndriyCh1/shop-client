@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getSession } from '@modules/auth/services';
+import { getSession } from '@modules/auth/services/auth-service';
 
 import { PUBLIC_ROUTES, ROOT, SIGN_IN, SIGN_UP } from '@libs/consts/routes';
 
 export async function middleware(request: NextRequest) {
   const { nextUrl } = request;
   const session = await getSession();
-  const isAuthenticated = !!session?.user;
-
+  const isAuthenticated = !!session?.user?.id;
   const isAuthRoute = [SIGN_IN, SIGN_UP].some((route) =>
     nextUrl.pathname.startsWith(route)
   );

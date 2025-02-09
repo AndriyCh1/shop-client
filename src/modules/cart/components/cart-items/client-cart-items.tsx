@@ -1,6 +1,6 @@
-import { useGetCartProductVariants } from '@modules/cart/queries';
-import { CartItem, useCartStore } from '@modules/cart/stores';
-import { UpdateCartData } from '@modules/cart/types';
+import { useGetCartProductVariants } from '@modules/cart/queries/use-get-cart-product-variants';
+import { useCartStore } from '@modules/cart/stores/use-cart-store';
+import { ClientCartItem, UpdateCartData } from '@modules/cart/types';
 import { mergeCartItemsWithVariants } from '@modules/cart/utils';
 
 import { Item } from './cart-item-container';
@@ -14,11 +14,11 @@ export function ClientCartItems({ className }: ClientCartItemsProps) {
   const { items, removeItem, updateItem } = useCartStore();
 
   const handleRemoveItem = (id: Item['id']) => {
-    removeItem(id as CartItem['id']);
+    removeItem(id as ClientCartItem['id']);
   };
 
   const handleUpdateItem = (id: Item['id'], data: UpdateCartData) => {
-    updateItem(id as CartItem['id'], data);
+    updateItem(id as ClientCartItem['id'], data);
   };
 
   const { data: productVariants } = useGetCartProductVariants({

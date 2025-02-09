@@ -3,7 +3,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 
 import { signOut } from '@modules/auth/actions';
-import { cartKeys } from '@modules/cart/query-keys';
+import { cartKeys } from '@modules/cart/consts/query-keys';
 
 import { Button, ButtonProps } from '@components/ui/button';
 

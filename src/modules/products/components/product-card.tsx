@@ -8,7 +8,8 @@ import { formatCurrency } from '@libs/utils/formatters';
 import { calculatePriceDecrease } from '@libs/utils/price';
 import { cn } from '@libs/utils/tw-merge';
 
-import { ProductImage, SalePriceBadge } from './';
+import { ProductImage } from './product-image';
+import { SalePriceBadge } from './sale-price-badge';
 
 export interface ProductCardProps {
   id: Product['id'];
