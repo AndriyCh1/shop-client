@@ -2,14 +2,7 @@ import React from 'react';
 
 import { srProductsService } from '@modules/products/services/products-service';
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@components/ui/breadcrumb';
+import { Breadcrumb } from '@components/shared/breadcrumb';
 
 import { Product } from '@libs/types/models';
 
@@ -25,34 +18,15 @@ export async function ProductBreadcrumb({
   const { data: pathToCategory } =
     await srProductsService.getCategoryPath(productId);
 
-  const pathToCategoryBreadcrumbs = pathToCategory
+  const breadcrumbItems = pathToCategory
     .sort((a, b) => (b.depth > a.depth ? 1 : -1))
-    .map((category) => ({
+    .map((category, idx) => ({
       name: category.name,
-      href: `/categories/${category.id}`
+      link:
+        idx === pathToCategory.length - 1
+          ? undefined
+          : `/category/${category.id}`
     }));
 
-  return (
-    <Breadcrumb className={className}>
-      <BreadcrumbList>
-        {pathToCategoryBreadcrumbs.map((breadcrumb, idx) => {
-          const isLast = idx === pathToCategoryBreadcrumbs.length - 1;
-
-          return (
-            <React.Fragment key={breadcrumb.name}>
-              <BreadcrumbItem>
-                {!isLast && (
-                  <BreadcrumbLink href={breadcrumb.href}>
-                    {breadcrumb.name}
-                  </BreadcrumbLink>
-                )}
-                {isLast && <BreadcrumbPage>{breadcrumb.name}</BreadcrumbPage>}
-              </BreadcrumbItem>
-              {!isLast && <BreadcrumbSeparator />}
-            </React.Fragment>
-          );
-        })}
-      </BreadcrumbList>
-    </Breadcrumb>
-  );
+  return <Breadcrumb className={className} items={breadcrumbItems} />;
 }
