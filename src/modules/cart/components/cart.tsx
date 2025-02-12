@@ -16,8 +16,7 @@ export interface CartProps {
   className?: string;
 }
 
-// FIXME: Loading, skeletons, refactor naming - cart store, local cart, server cart
-// Stock availability, error messages, optimistic updates
+// TODO: Enhance error handling, better stock availability, add optimistic updates
 export function Cart({ className }: CartProps) {
   const isAuthenticated = !!useSession().data;
 
@@ -34,7 +33,11 @@ export function Cart({ className }: CartProps) {
 
   if (!useIsMounted()) return null;
 
-  if (getCartQuery.isLoading || qetCartProductVariantsQuery.isLoading) {
+  if (
+    getCartQuery.isLoading ||
+    qetCartProductVariantsQuery.isLoading ||
+    !useCartStore?.persist?.hasHydrated
+  ) {
     return <CartSkeleton />;
   }
 
