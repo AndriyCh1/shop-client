@@ -108,4 +108,27 @@
 	@apply rounded-full bg-muted;
 }
 
+.StripeElement {
+  width: 100%;
+  border: 1px solid hsl(var(--input)); 
+  background-color: hsl(var(--background)); 
+  padding: 0.7rem 0.75rem; 
+  font-size: 1.25rem; 
+  border-radius: 0.1rem; 
+  line-height: 1.5rem ;
+  color: hsl(var(--foreground));
+}
 
+
+.StripeElement::placeholder {
+  color: var(--muted-foreground);
+}
+
+.StripeElement--focus {
+  border-color: hsl(var(--primary)) !important; 
+}
+
+.StripeElement--disabled {
+  cursor: not-allowed;
+  opacity: 0.5; 
+}

@@ -8,6 +8,8 @@ export const PUBLIC_ROUTES = [
   '/category',
   '/products',
   '/cart',
+  '/checkout',
+  '/checkout/success',
   '/api/auth/callback/google',
   '/api/auth/callback/github'
 ];

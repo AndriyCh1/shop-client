@@ -70,3 +70,46 @@ export type Cart = {
   id: number;
   cartItems: CartItem[];
 };
+
+export type OrderItem = {
+  id: number;
+  price: number;
+  quantity: number;
+  total: number;
+  productName: string;
+  productVariantName: string;
+  productVariantSku: string;
+  productVariant: {
+    id: number;
+  };
+};
+
+export type Order = {
+  id: number;
+  orderItems: OrderItem[];
+  orderStatus: {
+    id: number;
+    statusName: string;
+    color: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  orderDeliveredCarrierDate: string | null;
+  orderDeliveredUserDate: string | null;
+  total: number;
+  customerFirstName: string;
+  customerLastName: string;
+  phoneNumber: string;
+  email: string;
+  addressLine1: string;
+  addressLine2: string;
+  country: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  user: {
+    id: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+};
